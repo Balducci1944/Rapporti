@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapporto di Intervento – Bruno Balducci s.r.l.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #d44a1a;
+  --orange-light: #f5ede8;
+  --dark: #1a1a1a;
+  --mid: #666;
+  --light: #f7f7f5;
+  --border: #e0e0e0;
+  --green: #2a7a4b;
+  --green-light: #f0f8f4;
+  --white: #fff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #eceae6;
+  min-height: 100vh;
+  padding: 20px 12px 40px;
+  color: var(--dark);
+}
+
+/* ── FORM PAGE ── */
+.page {
+  max-width: 740px;
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: 0 2px 24px rgba(0,0,0,.10);
+}
+
+/* HEADER */
+.hd {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 3px solid var(--orange);
+}
+.hd-left {
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+}
+.logo-row { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+.logo-bb {
+  width: 36px; height: 36px;
+  background: var(--orange); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 13px; flex-shrink: 0;
+  font-family: 'Barlow Condensed', sans-serif; letter-spacing: -.5px;
+}
+.logo-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--orange); text-transform: lowercase; line-height: 1; }
+.logo-name span { color: var(--dark); }
+.logo-tag { font-size: 8px; color: var(--mid); text-transform: uppercase; letter-spacing: .6px; margin-top: 1px; }
+.hd-info { font-size: 9px; color: var(--mid); line-height: 1.65; }
+.hd-right { padding: 16px 18px; }
+
+/* Dati precompilati */
+.precomp {
+  background: var(--green-light);
+  border: 1.5px solid var(--green);
+  padding: 12px;
+}
+.precomp-tag { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+.precomp-grid { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
+.pc-f { display: flex; flex-direction: column; gap: 1px; }
+.pc-l { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); }
+.pc-v { font-size: 14px; font-weight: 700; color: var(--dark); }
+.pc-v.big { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: var(--orange); }
+
+/* Campi manuali */
+.manuale { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.f-grp { display: flex; flex-direction: column; gap: 3px; }
+.f-lbl { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); }
+input[type=text], input[type=date], input[type=time], textarea, select {
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: var(--dark);
+  padding: 5px 2px; width: 100%; outline: none;
+  transition: border-color .18s;
+}
+input:focus, textarea:focus { border-bottom-color: var(--orange); }
+
+/* TIPO */
+.tipo-bar {
+  background: var(--orange-light);
+  border-bottom: 1px solid #e8cfc5;
+  padding: 8px 18px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.tipo-lbl { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-right: 4px; }
+.radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+.radio-item input { width: 14px; height: 14px; accent-color: var(--orange); cursor: pointer; }
+.radio-item span { font-size: 12px; font-weight: 600; }
+
+/* SEZIONI */
+.sec { padding: 10px 18px; border-bottom: 1px solid var(--border); }
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
+}
+
+/* MONTATORI PILLS */
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 11px;
+  border: 1.5px solid var(--border); border-radius: 20px;
+  cursor: pointer; user-select: none;
+  transition: all .13s; background: var(--white);
+}
+.pill:hover { border-color: var(--orange); background: var(--orange-light); }
+.pill:has(input:checked) { border-color: var(--orange); background: var(--orange-light); }
+.pill input { width: 13px; height: 13px; accent-color: var(--orange); cursor: pointer; flex-shrink: 0; }
+.pill input:checked + span { color: var(--orange); font-weight: 700; }
+.pill span { font-size: 11.5px; }
+.pill-sel { font-size: 10px; color: var(--mid); font-style: italic; margin-top: 6px; min-height: 16px; }
+
+/* TABELLA ORE */
+.tbl-wrap { overflow-x: auto; border-bottom: 1px solid var(--border); }
+.tbl-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--orange);
+  padding: 9px 18px 5px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 11px; }
+thead th {
+  background: var(--dark); color: #fff;
+  padding: 6px 4px; text-align: center;
+  font-weight: 600; font-size: 9px; letter-spacing: .4px;
+}
+thead th:first-child { text-align: left; padding-left: 18px; width: 82px; }
+tbody tr:nth-child(even) { background: var(--light); }
+tbody tr:hover { background: var(--orange-light); }
+tbody td { padding: 0; border-right: 1px solid var(--border); text-align: center; }
+tbody td:first-child { padding-left: 18px; font-weight: 700; color: var(--orange); font-size: 11px; text-align: left; border-right: 2px solid var(--border); }
+tbody td input[type=date] { font-size: 10.5px; padding: 7px 3px; border-bottom: none; }
+tbody td input[type=time] { font-size: 10.5px; padding: 7px 3px; border-bottom: none; min-width: 62px; }
+tbody td input[type=text] { font-size: 10.5px; padding: 7px 3px; border-bottom: none; max-width: 48px; text-align: center; }
+
+/* NOTE */
+.note-sec { padding: 10px 18px; border-bottom: 1px solid var(--border); }
+.note-sec textarea {
+  width: 100%; min-height: 110px;
+  border: 1.5px solid var(--border); padding: 9px;
+  font-size: 13px; resize: vertical; border-radius: 2px; margin-top: 6px;
+}
+.note-sec textarea:focus { border-color: var(--orange); outline: none; }
+
+/* FIRMA */
+.firma-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.firma-left { padding: 12px 18px; border-right: 1px solid var(--border); }
+.avviso { font-size: 8.5px; color: var(--mid); line-height: 1.6; margin-bottom: 8px; }
+.copia-tag { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); }
+.firma-right { padding: 12px 18px; display: flex; flex-direction: column; gap: 6px; }
+.firma-head {
+  background: var(--dark); color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 4px 8px; text-align: center;
+}
+.canvas-box { border: 1.5px solid var(--border); background: var(--light); height: 96px; position: relative; }
+canvas { width: 100%; height: 100%; cursor: crosshair; display: block; touch-action: none; }
+.firma-meta { display: flex; justify-content: space-between; align-items: center; }
+.firma-hint { font-size: 8.5px; color: #bbb; }
+.btn-canc { background: none; border: 1px solid var(--border); font-size: 9.5px; color: var(--mid); padding: 2px 7px; cursor: pointer; font-family: 'Barlow', sans-serif; }
+.btn-canc:hover { border-color: var(--orange); color: var(--orange); }
+
+/* AZIONI */
+.actions {
+  padding: 14px 18px;
+  background: var(--light);
+  display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;
+}
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 13px; letter-spacing: 1px;
+  text-transform: uppercase; padding: 10px 22px;
+  border: none; cursor: pointer; transition: all .18s;
+}
+.btn-reset { background: var(--white); color: var(--mid); border: 1.5px solid var(--border); }
+.btn-reset:hover { border-color: var(--dark); color: var(--dark); }
+.btn-pdf { background: var(--orange); color: #fff; }
+.btn-pdf:hover { background: #b83d12; }
+.btn-wa-send { background: #25d366; color: #fff; }
+.btn-wa-send:hover { background: #1da851; }
+
+/* Banner WhatsApp post-stampa */
+/* Banner post-stampa (WhatsApp + Email) */
+.post-banner { display:none; }
+.post-banner.show { display:block; }
+.post-banner-inner { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.pb-block { padding:14px 16px; }
+.pb-wa   { background:#f0faf4; border:2px solid #25d366; border-right:1px solid #c3e6cb; }
+.pb-mail { background:#eef4ff; border:2px solid #3b6dd4; border-left:1px solid #b8cef0; }
+.pb-title { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:5px; }
+.pb-wa  .pb-title { color:#1a7a40; }
+.pb-mail .pb-title { color:#2a4da0; }
+.pb-text { font-size:11px; color:#555; margin-bottom:10px; line-height:1.5; min-height:40px; }
+.pb-btn { display:inline-flex; align-items:center; justify-content:center; gap:7px; border:none; padding:9px 14px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; text-decoration:none; width:100%; }
+.pb-btn-wa   { background:#25d366; color:#fff; }
+.pb-btn-wa:hover { background:#1da851; }
+.pb-btn-mail { background:#3b6dd4; color:#fff; }
+.pb-btn-mail:hover { background:#2a4da0; }
+.pb-step { font-size:10px; color:#888; margin-top:7px; line-height:1.5; }
+.pb-step strong { color:#555; }
+@media(max-width:560px){ .post-banner-inner{ grid-template-columns:1fr; } .pb-mail{ border-left:2px solid #3b6dd4; border-top:1px solid #b8cef0; } }
+
+/* ── SCHERMATA UFFICIO ── */
+.ufficio-page { display: none; max-width: 740px; margin: 0 auto; }
+
+.uff-header {
+  background: var(--dark); color: #fff;
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.uff-brand { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--orange); }
+.uff-sub { font-size: 10px; color: #aaa; letter-spacing: 1px; text-transform: uppercase; }
+.uff-exit { font-size: 12px; color: var(--orange); cursor: pointer; background: none; border: none; font-family: 'Barlow', sans-serif; }
+
+.uff-card { background: var(--white); box-shadow: 0 2px 16px rgba(0,0,0,.08); padding: 22px 24px; margin-bottom: 16px; }
+.uff-card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--orange-light); }
+
+.uff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.uff-f { display: flex; flex-direction: column; gap: 4px; }
+.uff-f label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); }
+.uff-f input { border: none; border-bottom: 1.5px solid var(--border); padding: 8px 2px; font-size: 14px; font-family: 'Barlow', sans-serif; outline: none; }
+.uff-f input:focus { border-bottom-color: var(--orange); }
+
+.uff-mont-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; display: block; }
+
+.btn-genera { width: 100%; background: var(--orange); color: #fff; border: none; padding: 13px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; margin-top: 16px; }
+.btn-genera:hover { background: #b83d12; }
+
+/* Risultato link */
+.link-result { display: none; margin-top: 14px; background: var(--green-light); border: 1.5px solid var(--green); padding: 14px; }
+.link-result.show { display: block; }
+.link-result-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+.link-box { font-size: 11px; font-family: monospace; background: #fff; padding: 8px 10px; border: 1px solid #c3e6cb; word-break: break-all; color: var(--dark); margin-bottom: 10px; }
+.link-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.lbtn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 8px 16px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.lbtn-copy { background: #fff; color: var(--mid); border: 1.5px solid var(--border); }
+.lbtn-copy:hover { border-color: var(--orange); color: var(--orange); }
+.lbtn-wa { background: #25d366; color: #fff; }
+.lbtn-wa:hover { background: #1da851; }
+.lbtn-open { background: var(--dark); color: #fff; }
+
+/* Storico */
+.storico-tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.storico-tbl thead th { background: var(--dark); color: #fff; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: .4px; }
+.storico-tbl tbody tr { border-bottom: 1px solid #eee; }
+.storico-tbl tbody tr:hover { background: #fdf8f6; }
+.storico-tbl tbody td { padding: 8px 10px; vertical-align: middle; }
+.s-acts { display: flex; gap: 5px; flex-wrap: wrap; }
+.sbtn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; padding: 4px 10px; border: 1.5px solid var(--border); background: #fff; color: var(--mid); cursor: pointer; text-decoration: none; display: inline-block; }
+.sbtn:hover { border-color: var(--orange); color: var(--orange); }
+.sbtn.wa { background: #25d366; color: #fff; border-color: #25d366; }
+.sbtn.wa:hover { background: #1da851; }
+.empty { text-align: center; padding: 28px; color: #ccc; font-size: 13px; }
+
+/* LOGIN */
+.login-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 100;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.login-overlay.show { display: flex; }
+.login-box { background: #fff; padding: 36px; width: 100%; max-width: 340px; box-shadow: 0 8px 40px rgba(0,0,0,.2); }
+.login-brand { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; color: var(--orange); text-align: center; margin-bottom: 4px; }
+.login-sub { font-size: 10px; color: #aaa; letter-spacing: 1px; text-transform: uppercase; text-align: center; margin-bottom: 24px; }
+.login-err { background: #fdecea; color: #c0392b; padding: 8px; font-size: 12px; margin-bottom: 12px; display: none; }
+.l-fg { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+.l-fg label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); }
+.l-fg input { border: none; border-bottom: 2px solid var(--border); padding: 8px 2px; font-size: 14px; font-family: 'Barlow', sans-serif; outline: none; }
+.l-fg input:focus { border-bottom-color: var(--orange); }
+.btn-accedi { width: 100%; background: var(--orange); color: #fff; border: none; padding: 11px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+.btn-accedi:hover { background: #b83d12; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: #fff; padding: 11px 18px; font-size: 13px; font-weight: 600; border-radius: 3px; opacity: 0; transform: translateY(8px); transition: all .25s; z-index: 999; }
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* Pulsante accesso ufficio */
+.uff-access {
+  max-width: 740px; margin: 0 auto 14px;
+  display: flex; justify-content: flex-end;
+}
+.btn-ufficio { background: var(--dark); color: #aaa; border: none; padding: 7px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+.btn-ufficio:hover { color: var(--orange); }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; }
+  .actions, .btn-canc, .toast, .uff-access, .post-banner { display: none !important; }
+}
+@media (max-width: 560px) {
+  .hd, .firma-row { grid-template-columns: 1fr; }
+  .hd-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .firma-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .precomp-grid, .manuale, .uff-grid { grid-template-columns: 1fr; }
+  .actions { justify-content: stretch; }
+  .btn { width: 100%; text-align: center; }
+  .link-btns { flex-direction: column; }
+  .lbtn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Pulsante accesso ufficio -->
+<div class="uff-access">
+  <button class="btn-ufficio" onclick="apriUfficio()">⚙ Pannello Ufficio</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     FORM MONTATORE
+═════════════════════════════════════════════════════════ -->
+<div class="page" id="formPage">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-left">
+      <div class="logo-row">
+        <div class="logo-bb">bb</div>
+        <div>
+          <div class="logo-name">bruno balducci<span> s.r.l.</span></div>
+          <div class="logo-tag">impianti di aspirazione · costruzioni aeromeccaniche</div>
+        </div>
+      </div>
+      <div class="hd-info">
+        Via Bari, snc · 26900 Lodi LO · Italy<br>
+        Tel. +39 0371 1732956 · Fax +39 0371 1930106<br>
+        C.F. 00819920156 · P.I. 02722240963<br>
+        www.brunobalducci.com
+      </div>
+    </div>
+    <div class="hd-right" id="hdRight">
+      <!-- popolato da JS -->
+    </div>
+  </div>
+
+  <!-- TIPO INTERVENTO -->
+  <div class="tipo-bar">
+    <span class="tipo-lbl">Tipo intervento:</span>
+    <label class="radio-item"><input type="radio" name="tipo" value="Contratto"><span>Contratto</span></label>
+    <label class="radio-item"><input type="radio" name="tipo" value="Garanzia"><span>Garanzia</span></label>
+    <label class="radio-item"><input type="radio" name="tipo" value="In economia"><span>In economia</span></label>
+  </div>
+
+  <!-- MONTATORI -->
+  <div class="sec">
+    <div class="sec-title">Montatori</div>
+    <div class="pills" id="pillsWrap">
+      <label class="pill"><input type="checkbox" value="Cesari Alessandro"><span>Cesari Alessandro</span></label>
+      <label class="pill"><input type="checkbox" value="Gallo Alessandro"><span>Gallo Alessandro</span></label>
+      <label class="pill"><input type="checkbox" value="Lacchini Francesco"><span>Lacchini Francesco</span></label>
+      <label class="pill"><input type="checkbox" value="Lacchini Mattia"><span>Lacchini Mattia</span></label>
+      <label class="pill"><input type="checkbox" value="Maccarinelli Oscar"><span>Maccarinelli Oscar</span></label>
+      <label class="pill"><input type="checkbox" value="Merli Simone"><span>Merli Simone</span></label>
+      <label class="pill"><input type="checkbox" value="Raimondo Marco"><span>Raimondo Marco</span></label>
+    </div>
+    <div class="pill-sel" id="pillSel">Nessun montatore selezionato</div>
+  </div>
+
+  <!-- TABELLA ORE -->
+  <div class="tbl-wrap">
+    <div class="tbl-title">Ore di lavoro settimanali</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Giorno</th><th>Data</th><th>Dalle</th><th>Alle</th>
+          <th>Dalle</th><th>Alle</th><th>Ore v.<br>Andata</th><th>Ore v.<br>Ritorno</th>
+        </tr>
+      </thead>
+      <tbody id="tblBody"></tbody>
+    </table>
+  </div>
+
+  <!-- NOTE -->
+  <div class="note-sec">
+    <div class="sec-title">Lavoro eseguito / Note</div>
+    <textarea id="note" placeholder="Descrizione lavoro eseguito, materiali utilizzati, problemi riscontrati…"></textarea>
+  </div>
+
+  <!-- FIRMA -->
+  <div class="firma-row">
+    <div class="firma-left">
+      <p class="avviso">Il montatore addetto al montaggio è tenuto ad avvisare tempestivamente la Bruno Balducci per lavori fuori contratto non indicati sul disegno di montaggio. Detto avviso dovrà essere regolarizzato dal Cliente per iscritto.<br><strong>Il presente riepilogo deve portare il timbro e/o la firma del Cliente.</strong></p>
+      <div class="copia-tag">Copia per il Cliente</div>
+    </div>
+    <div class="firma-right">
+      <div class="firma-head">Timbro e Firma del Cliente</div>
+      <div class="canvas-box"><canvas id="firmaCanvas"></canvas></div>
+      <div class="firma-meta">
+        <span class="firma-hint">Firma con il dito o il mouse</span>
+        <button class="btn-canc" onclick="clearFirma()">✕ Cancella</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AZIONI -->
+  <div class="actions">
+    <button class="btn btn-reset" onclick="resetForm()">↺ Azzera</button>
+    <button class="btn btn-pdf"   onclick="stampaPDF()">🖨 Stampa / Salva PDF</button>
+  </div>
+
+  <!-- BANNER POST-STAMPA: WhatsApp + Email -->
+  <div class="post-banner" id="postBanner">
+    <div class="post-banner-inner">
+
+      <!-- WhatsApp -->
+      <div class="pb-block pb-wa">
+        <div class="pb-title">📱 Invia via WhatsApp</div>
+        <div class="pb-text">Riepilogo completo con commessa, cliente, montatori e ore lavorate.</div>
+        <a class="pb-btn pb-btn-wa" id="waBannerBtn" href="#" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Invia su WhatsApp
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div class="pb-block pb-mail">
+        <div class="pb-title">✉️ Invia via Email</div>
+        <div class="pb-text">Apre la tua app email precompilata. <strong>Allega il PDF</strong> appena salvato e premi Invia.</div>
+        <a class="pb-btn pb-btn-mail" id="mailBannerBtn" href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Apri app email
+        </a>
+        <div class="pb-step">① Apri email &nbsp;②&nbsp;<strong>Allega il PDF</strong> &nbsp;③ Invia</div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /formPage -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     PANNELLO UFFICIO
+═════════════════════════════════════════════════════════ -->
+<div class="ufficio-page" id="uffPage">
+
+  <div class="uff-header">
+    <div>
+      <div class="uff-brand">bruno balducci s.r.l.</div>
+      <div class="uff-sub">Pannello Ufficio — Rapporti di Intervento</div>
+    </div>
+    <button class="uff-exit" onclick="chiudiUfficio()">← Torna al rapporto</button>
+  </div>
+
+  <!-- GENERA LINK -->
+  <div class="uff-card">
+    <div class="uff-card-title">➕ Genera nuovo rapporto</div>
+    <div class="uff-grid">
+      <div class="uff-f"><label>N° Commessa *</label><input type="text" id="uffCommessa" placeholder="es. 2024-0123"></div>
+      <div class="uff-f"><label>Cliente *</label><input type="text" id="uffCliente" placeholder="Ragione sociale"></div>
+    </div>
+    <span class="uff-mont-lbl">Montatore/i (opzionale)</span>
+    <div class="pills" id="uffPills">
+      <label class="pill"><input type="checkbox" value="Cesari Alessandro"><span>Cesari Alessandro</span></label>
+      <label class="pill"><input type="checkbox" value="Gallo Alessandro"><span>Gallo Alessandro</span></label>
+      <label class="pill"><input type="checkbox" value="Lacchini Francesco"><span>Lacchini Francesco</span></label>
+      <label class="pill"><input type="checkbox" value="Lacchini Mattia"><span>Lacchini Mattia</span></label>
+      <label class="pill"><input type="checkbox" value="Maccarinelli Oscar"><span>Maccarinelli Oscar</span></label>
+      <label class="pill"><input type="checkbox" value="Merli Simone"><span>Merli Simone</span></label>
+      <label class="pill"><input type="checkbox" value="Raimondo Marco"><span>Raimondo Marco</span></label>
+    </div>
+    <button class="btn-genera" onclick="generaLink()">Genera link →</button>
+
+    <div class="link-result" id="linkResult">
+      <div class="link-result-lbl">✓ Link pronto — invialo al montatore</div>
+      <div class="link-box" id="linkBox"></div>
+      <div class="link-btns">
+        <button class="lbtn lbtn-copy" onclick="copiaLink()">📋 Copia link</button>
+        <a class="lbtn lbtn-wa" id="btnWa" href="#" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Invia su WhatsApp
+        </a>
+        <a class="lbtn lbtn-open" id="btnOpen" href="#" target="_blank">Apri →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORICO -->
+  <div class="uff-card">
+    <div class="uff-card-title">📋 Storico link generati</div>
+    <div id="storicoWrap"><div class="empty">Nessun rapporto generato ancora in questa sessione.</div></div>
+    <p style="font-size:10px;color:#bbb;margin-top:12px;line-height:1.6">
+      ℹ️ Lo storico è salvato nel browser — rimane disponibile anche dopo aver chiuso e riaperto la pagina.
+    </p>
+  </div>
+
+</div><!-- /uffPage -->
+
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-brand">bruno balducci</div>
+    <div class="login-sub">Pannello Ufficio</div>
+    <div class="login-err" id="loginErr">Password non corretta.</div>
+    <div class="l-fg">
+      <label>Password</label>
+      <input type="password" id="pwdInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="btn-accedi" onclick="login()">Accedi</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+// ════════════════════════════════════════════════════════
+// CONFIGURAZIONE
+// Dopo aver caricato su GitHub Pages, cambia BASE con
+// l'URL reale della tua pagina (senza slash finale)
+// ════════════════════════════════════════════════════════
+const BASE            = 'https://balducci1944.github.io/Rapporti';
+const PASSWORD        = 'Balducci2024';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdO_9GV6YTVxGfKrn0hhxOJ56n2QapE0Y5d-hE8Ev2yAckxoEqtyYqagmm7C1DmxPA/exec'; 
+const GIORNI          = ['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'];
+
+// ── LEGGI PARAMETRI URL ──────────────────────────────────
+const QS          = new URLSearchParams(window.location.search);
+const pCommessa   = QS.get('commessa')  || '';
+const pCliente    = QS.get('cliente')   || '';
+const pMontatori  = QS.get('montatori') ? QS.get('montatori').split(',') : [];
+
+// ── HEADER FORM ──────────────────────────────────────────
+const hdRight = document.getElementById('hdRight');
+if (pCommessa || pCliente) {
+  hdRight.innerHTML = `
+    <div class="precomp">
+      <div class="precomp-tag">✓ Precompilato dall'ufficio</div>
+      <div class="precomp-grid">
+        <div class="pc-f"><span class="pc-l">Cliente</span><span class="pc-v">${x(pCliente)}</span></div>
+        <div class="pc-f" style="text-align:right"><span class="pc-l">Commessa</span><span class="pc-v big">${x(pCommessa)}</span></div>
+      </div>
+    </div>`;
+} else {
+  hdRight.innerHTML = `
+    <div class="manuale">
+      <div class="f-grp"><span class="f-lbl">Intervento presso</span><input type="text" id="inCliente" placeholder="Ragione sociale"></div>
+      <div class="f-grp"><span class="f-lbl">Commessa N°</span><input type="text" id="inCommessa" placeholder="––"></div>
+    </div>`;
+}
+
+// ── PRESELEZIONA MONTATORI ───────────────────────────────
+if (pMontatori.length) {
+  document.querySelectorAll('#pillsWrap input').forEach(cb => {
+    if (pMontatori.includes(cb.value)) cb.checked = true;
+  });
+  aggPills();
+}
+
+// ── PILLS ────────────────────────────────────────────────
+document.querySelectorAll('#pillsWrap input').forEach(cb => cb.addEventListener('change', aggPills));
+function aggPills() {
+  const sel = [...document.querySelectorAll('#pillsWrap input:checked')].map(c => c.value);
+  document.getElementById('pillSel').textContent = sel.length ? '✓ ' + sel.join(' · ') : 'Nessun montatore selezionato';
+}
+
+// ── TABELLA ORE ──────────────────────────────────────────
+(function buildTable() {
+  document.getElementById('tblBody').innerHTML = GIORNI.map((g,i) => `
+    <tr>
+      <td>${g}</td>
+      <td><input type="date" id="d${i}"></td>
+      <td><input type="time" id="t1${i}"></td>
+      <td><input type="time" id="t2${i}"></td>
+      <td><input type="time" id="t3${i}"></td>
+      <td><input type="time" id="t4${i}"></td>
+      <td><input type="text" id="va${i}" placeholder="0h"></td>
+      <td><input type="text" id="vr${i}" placeholder="0h"></td>
+    </tr>`).join('');
+})();
+
+// ── FIRMA ────────────────────────────────────────────────
+let cv, ctx, pen = false, px = 0, py = 0;
+window.addEventListener('load', () => {
+  cv  = document.getElementById('firmaCanvas');
+  cv.width  = cv.parentElement.offsetWidth;
+  cv.height = cv.parentElement.offsetHeight;
+  ctx = cv.getContext('2d');
+  ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  const pos = e => { const r = cv.getBoundingClientRect(); return [(e.clientX-r.left)*cv.width/r.width, (e.clientY-r.top)*cv.height/r.height]; };
+  const draw = e => { if (!pen) return; const [x,y]=pos(e); ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(x,y); ctx.stroke(); [px,py]=[x,y]; };
+  cv.addEventListener('mousedown',  e => { pen=true;  [px,py]=pos(e); });
+  cv.addEventListener('mousemove',  draw);
+  cv.addEventListener('mouseup',    () => pen=false);
+  cv.addEventListener('mouseleave', () => pen=false);
+  cv.addEventListener('touchstart', e => { e.preventDefault(); pen=true; [px,py]=pos(e.touches[0]); }, {passive:false});
+  cv.addEventListener('touchmove',  e => { e.preventDefault(); draw(e.touches[0]); }, {passive:false});
+  cv.addEventListener('touchend',   () => pen=false);
+});
+function clearFirma() { ctx.clearRect(0,0,cv.width,cv.height); }
+
+// ── AZIONI FORM ──────────────────────────────────────────
+function resetForm() {
+  if (!confirm('Azzerare tutti i dati?')) return;
+  document.querySelectorAll('#formPage input[type=text]:not(#inCliente):not(#inCommessa), #formPage input[type=date], #formPage input[type=time], #formPage textarea').forEach(el => el.value='');
+  document.querySelectorAll('#formPage input[type=radio], #formPage input[type=checkbox]').forEach(el => el.checked=false);
+  aggPills();
+  if (ctx) clearFirma();
+}
+function stampaPDF() {
+  // Costruisci messaggio WhatsApp con riepilogo completo
+  const commessa  = pCommessa  || (document.getElementById('inCommessa')?.value.trim()  || '—');
+  const cliente   = pCliente   || (document.getElementById('inCliente')?.value.trim()   || '—');
+  const tipo      = document.querySelector('input[name="tipo"]:checked')?.value || '—';
+  const montatori = [...document.querySelectorAll('#pillsWrap input:checked')].map(c => c.value);
+  const note      = document.getElementById('note').value.trim();
+
+  // Raccoglie le righe ore compilate
+  const righeOre = GIORNI.map((g,i) => {
+    const data = document.getElementById('d'+i)?.value;
+    const t1   = document.getElementById('t1'+i)?.value;
+    const t2   = document.getElementById('t2'+i)?.value;
+    const t3   = document.getElementById('t3'+i)?.value;
+    const t4   = document.getElementById('t4'+i)?.value;
+    const va   = document.getElementById('va'+i)?.value;
+    const vr   = document.getElementById('vr'+i)?.value;
+    if (!data && !t1) return null;
+    let riga = `  ${g} ${data}`;
+    if (t1 || t2) riga += ` | ${t1||'--'}→${t2||'--'}`;
+    if (t3 || t4) riga += ` / ${t3||'--'}→${t4||'--'}`;
+    if (va || vr) riga += ` | viaggio A:${va||'0'} R:${vr||'0'}`;
+    return riga;
+  }).filter(Boolean);
+
+  const dataOggi = new Date().toLocaleDateString('it-IT');
+  const ora      = new Date().toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit'});
+
+  let msg = `🔧 *RAPPORTO DI INTERVENTO*\n`;
+  msg += `Bruno Balducci s.r.l. — ${dataOggi} ore ${ora}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `📋 *Commessa:* ${commessa}\n`;
+  msg += `🏭 *Cliente:* ${cliente}\n`;
+  msg += `⚙️ *Tipo:* ${tipo}\n`;
+  msg += `👷 *Montatori:* ${montatori.length ? montatori.join(', ') : '—'}\n`;
+
+  if (righeOre.length) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `🕐 *Ore lavorate:*\n${righeOre.join('\n')}\n`;
+  }
+
+  if (note) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `📝 *Note:* ${note}\n`;
+  }
+
+  msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Allegare il PDF del rapporto firmato._`;
+
+  // Imposta link WhatsApp ufficio
+  const UFFICIO_WA = '393488864338';
+  const waUrl = `https://wa.me/${UFFICIO_WA}?text=${encodeURIComponent(msg)}`;
+  document.getElementById('waBannerBtn').href = waUrl;
+  // gestito nel nuovo banner
+
+  // Email mailto
+  const UFFICIO_MAIL = 'segreteria@brunobalducci.com';
+  const oggetto = `Rapporto intervento — Commessa ${commessa} — ${cliente}`;
+  const corpo = [
+    `RAPPORTO DI INTERVENTO — Bruno Balducci s.r.l.`,
+    `Data: ${dataOggi} ore ${ora}`,
+    ``,
+    `Commessa: ${commessa}`,
+    `Cliente: ${cliente}`,
+    `Tipo intervento: ${tipo}`,
+    `Montatori: ${montatori.length ? montatori.join(', ') : '—'}`,
+    righeOre.length ? `\nORE LAVORATE:\n${righeOre.join('\n')}` : '',
+    note ? `\nNOTE:\n${note}` : '',
+    ``,
+    `⚠ Allegare il PDF del rapporto firmato.`,
+    ``,
+    `Bruno Balducci s.r.l. — Via Bari snc, 26900 Lodi LO`,
+  ].filter(r => r !== undefined).join('\n');
+
+  const mailUrl = `mailto:${UFFICIO_MAIL}?cc=info@brunobalducci.com&subject=${encodeURIComponent(oggetto)}&body=${encodeURIComponent(corpo)}`;
+  document.getElementById('mailBannerBtn').href = mailUrl;
+
+  // Mostra banner
+  document.getElementById('postBanner').classList.add('show');
+  document.getElementById('waBannerBtn').scrollIntoView({behavior:'smooth', block:'nearest'});
+
+  // Invia dati STRUTTURATI a Google Sheets (un oggetto per giorno)
+  const oreStrutturate = GIORNI.map((g, i) => ({
+    giorno:  g,
+    data:    document.getElementById('d'+i)?.value  || '',
+    dalle1:  document.getElementById('t1'+i)?.value || '',
+    alle1:   document.getElementById('t2'+i)?.value || '',
+    dalle2:  document.getElementById('t3'+i)?.value || '',
+    alle2:   document.getElementById('t4'+i)?.value || '',
+    viaggioA: document.getElementById('va'+i)?.value || '',
+    viaggioR: document.getElementById('vr'+i)?.value || '',
+  }));
+  salvasuSheets({
+    commessa, cliente, tipo,
+    montatori: montatori.join(', ') || '—',
+    note, data: dataOggi + ' ' + ora,
+    ore: JSON.stringify(oreStrutturate)  // Stringa per compatibilità Apps Script
+  });
+
+  // Stampa
+  toast('💾 Salva PDF → poi invia WA e/o Email all\'ufficio ↓');
+  setTimeout(() => window.print(), 400);
+}
+
+// ── SALVA SU GOOGLE SHEETS ───────────────────────────────
+async function salvasuSheets(dati) {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('INSERISCI')) return; // non configurato
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // necessario per Apps Script
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dati)
+    });
+    // no-cors non permette di leggere la risposta, ma la richiesta parte
+    console.log('Dati inviati a Google Sheets');
+  } catch(e) {
+    console.warn('Impossibile salvare su Sheets:', e.message);
+    // Non mostrare errore all'utente — il salvataggio è in background
+  }
+}
+
+// ── PANNELLO UFFICIO ─────────────────────────────────────
+function apriUfficio() {
+  if (!sessionStorage.getItem('bb_ok')) {
+    document.getElementById('loginOverlay').classList.add('show');
+    setTimeout(() => document.getElementById('pwdInput').focus(), 100);
+  } else {
+    mostraUfficio();
+  }
+}
+function login() {
+  if (document.getElementById('pwdInput').value === PASSWORD) {
+    sessionStorage.setItem('bb_ok','1');
+    document.getElementById('loginOverlay').classList.remove('show');
+    mostraUfficio();
+  } else {
+    document.getElementById('loginErr').style.display='block';
+  }
+}
+function mostraUfficio() {
+  document.getElementById('formPage').style.display  = 'none';
+  document.querySelector('.uff-access').style.display = 'none';
+  document.getElementById('uffPage').style.display   = 'block';
+  renderStorico();
+}
+function chiudiUfficio() {
+  document.getElementById('formPage').style.display  = 'block';
+  document.querySelector('.uff-access').style.display = 'flex';
+  document.getElementById('uffPage').style.display   = 'none';
+}
+
+// ── GENERA LINK ──────────────────────────────────────────
+function generaLink() {
+  const commessa  = document.getElementById('uffCommessa').value.trim();
+  const cliente   = document.getElementById('uffCliente').value.trim();
+  if (!commessa || !cliente) { alert('Inserisci Commessa e Cliente.'); return; }
+
+  const monts = [...document.querySelectorAll('#uffPills input:checked')].map(c => c.value);
+  const p     = new URLSearchParams({ commessa, cliente });
+  if (monts.length) p.set('montatori', monts.join(','));
+
+  const link = BASE + '/index.html?' + p.toString();
+
+  document.getElementById('linkBox').textContent = link;
+  document.getElementById('btnOpen').href = link;
+  document.getElementById('btnWa').href  = 'https://wa.me/?text=' + encodeURIComponent('Ciao! Compila il rapporto di intervento:\n' + link);
+  document.getElementById('linkResult').classList.add('show');
+
+  // Salva in storico
+  const storico = JSON.parse(localStorage.getItem('bb_storico') || '[]');
+  storico.unshift({ commessa, cliente, montatori: monts.join(', ')||'—', link, data: new Date().toLocaleString('it-IT') });
+  if (storico.length > 100) storico.length = 100;
+  localStorage.setItem('bb_storico', JSON.stringify(storico));
+  renderStorico();
+
+  // Reset
+  document.getElementById('uffCommessa').value = '';
+  document.getElementById('uffCliente').value  = '';
+  document.querySelectorAll('#uffPills input').forEach(c => c.checked=false);
+
+  document.getElementById('linkResult').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function copiaLink() {
+  const url = document.getElementById('linkBox').textContent.trim();
+  navigator.clipboard.writeText(url)
+    .then(()  => toast('Link copiato!'))
+    .catch(() => prompt('Copia il link:', url));
+}
+
+// ── STORICO ──────────────────────────────────────────────
+function renderStorico() {
+  const list = JSON.parse(localStorage.getItem('bb_storico') || '[]');
+  const wrap = document.getElementById('storicoWrap');
+  if (!list.length) { wrap.innerHTML = '<div class="empty">Nessun rapporto generato.</div>'; return; }
+  wrap.innerHTML = `<div style="overflow-x:auto"><table class="storico-tbl">
+    <thead><tr><th>Commessa</th><th>Cliente</th><th>Montatori</th><th>Generato il</th><th>Azioni</th></tr></thead>
+    <tbody>${list.map((r,i) => `<tr>
+      <td><strong>${x(r.commessa)}</strong></td>
+      <td>${x(r.cliente)}</td>
+      <td>${x(r.montatori)}</td>
+      <td>${x(r.data)}</td>
+      <td><div class="s-acts">
+        <a href="${x(r.link)}" target="_blank" class="sbtn">Apri</a>
+        <a href="https://wa.me/?text=${encodeURIComponent('Rapporto:\n'+r.link)}" target="_blank" class="sbtn wa">WA</a>
+        <button class="sbtn" onclick="copiaT('${r.link.replace(/'/g,"\\'")}')">Copia</button>
+        <button class="sbtn" style="color:#c0392b;border-color:#e0b0b0" onclick="delStorico(${i})">✕</button>
+      </div></td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+function delStorico(i) {
+  const s = JSON.parse(localStorage.getItem('bb_storico') || '[]');
+  s.splice(i,1);
+  localStorage.setItem('bb_storico', JSON.stringify(s));
+  renderStorico();
+}
+
+function copiaT(url) {
+  navigator.clipboard.writeText(url).then(()=>toast('Copiato!')).catch(()=>prompt('Copia:',url));
+}
+
+// ── UTILS ────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function x(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
